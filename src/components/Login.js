@@ -17,9 +17,7 @@ const Login = () => {
   const password = useRef(null);
 
   const handleClickButtonClick = (e) => {
-    // Logic goes here and first validation goes here
     e.preventDefault();
-    console.log("Triggered by:", e.type);
 
     const nameValue = isSignInForm ? null : name.current?.value;
     const emailValue = email.current?.value;
