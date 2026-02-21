@@ -17,9 +17,17 @@ const Login = () => {
     e.preventDefault();
     console.log("Triggered by:", e.type);
 
-    if (!email.current || !password.current) return;
+    const nameValue = isSignInForm ? null : name.current?.value;
+    const emailValue = email.current?.value;
+    const passwordValue = password.current?.value;
 
-    const message = checkValidData(email.current.value, password.current.value);
+    const message = checkValidData(
+      nameValue,
+      emailValue,
+      passwordValue,
+      isSignInForm,
+    );
+
     setErrorMessage(message);
     if (message) return;
   };
