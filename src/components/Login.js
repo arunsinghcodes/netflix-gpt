@@ -29,59 +29,73 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="relative min-h-screen text-white">
       <Header />
-      <div className="absolute">
+
+      {/* Background */}
+      <div className="absolute inset-0 -z-10">
         <img
-          // className="h-screen object-cover"
+          className="w-full h-full object-cover"
           src="https://assets.nflxext.com/ffe/siteui/vlv3/37372b0c-16ef-4614-9c66-f0464ffe4136/web/IN-en-20260216-TRIFECTA-perspective_74aa38a5-f527-417e-a604-a039567a350b_large.jpg"
-          srcSet="
-        https://assets.nflxext.com/ffe/siteui/vlv3/37372b0c-16ef-4614-9c66-f0464ffe4136/web/IN-en-20260216-TRIFECTA-perspective_74aa38a5-f527-417e-a604-a039567a350b_large.jpg  2000w,
-        https://assets.nflxext.com/ffe/siteui/vlv3/37372b0c-16ef-4614-9c66-f0464ffe4136/web/IN-en-20260216-TRIFECTA-perspective_74aa38a5-f527-417e-a604-a039567a350b_medium.jpg 1279w,
-        https://assets.nflxext.com/ffe/siteui/vlv3/37372b0c-16ef-4614-9c66-f0464ffe4136/web/IN-en-20260216-TRIFECTA-perspective_74aa38a5-f527-417e-a604-a039567a350b_small.jpg   959w
-      "
-          alt=""
-          aria-hidden="true"
+          alt="background"
         />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
       </div>
-      <form
-        // onSubmit={(e) => e.preventDefault()}
-        onSubmit={handleClickButtonClick}
-        className="w-full md:w-6/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80"
-      >
-        <h1 className="font-bold text-3xl py-4">
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </h1>
-        {!isSignInForm && (
+
+      {/* Form Container */}
+      <div className="flex justify-center items-center min-h-screen px-4">
+        <form
+          onSubmit={handleClickButtonClick}
+          className="w-full max-w-md bg-black bg-opacity-80 p-8 rounded-xl shadow-2xl"
+        >
+          <h1 className="text-3xl font-bold mb-6">
+            {isSignInForm ? "Sign In" : "Sign Up"}
+          </h1>
+          {!isSignInForm && (
+            <input
+              ref={name}
+              type="text"
+              placeholder="Full Name"
+              className="w-full p-4 my-4 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+            />
+          )}
+
           <input
-            ref={name}
+            ref={email}
             type="text"
-            placeholder="Full Name"
-            className="p-4 my-4 w-full bg-gray-700"
+            placeholder="Email Address"
+            className="w-full p-4 my-4 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
           />
-        )}
-        <input
-          ref={email}
-          type="text"
-          placeholder="Email Address"
-          className="p-4 my-4 w-full bg-gray-700"
-        />
-        <input
-          ref={password}
-          type="password"
-          placeholder="Password"
-          className="p-4 my-4 w-full bg-gray-700"
-        />
-        <p className="text-red-500 font-bold text-lg py-2">{errorMessage}</p>
-        <button type="submit" className="p-4 my-6 bg-red-700 w-full rounded-lg">
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </button>
-        <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
-          {isSignInForm
-            ? "New to Netflix? Sign Up Now"
-            : "Already registered? Sign In Now."}
-        </p>
-      </form>
+
+          <input
+            ref={password}
+            type="password"
+            placeholder="Password"
+            className="w-full p-4 my-4 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+          />
+
+          {errorMessage && (
+            <p className="text-red-500 text-sm py-2">{errorMessage}</p>
+          )}
+
+          <button
+            type="submit"
+            className="w-full my-6 bg-red-600 hover:bg-red-700 transition duration-300 p-4 rounded-md font-semibold"
+          >
+            {isSignInForm ? "Sign In" : "Sign Up"}
+          </button>
+
+          <p
+            className="mt-6 text-sm text-gray-400 cursor-pointer hover:underline"
+            onClick={toggleSignInForm}
+          >
+            {isSignInForm
+              ? "New to Netflix? Sign Up Now"
+              : "Already registered? Sign In Now."}
+          </p>
+        </form>
+      </div>
     </div>
   );
 };
