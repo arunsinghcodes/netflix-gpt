@@ -5,7 +5,11 @@ import { checkValidData } from "../utils/validate";
 //? useRef:- useRef is a React Hook that lets you reference a value that's not needed for rendering
 
 const Login = () => {
-  const [isSignInForm, setIsSignInForm] = useState(true);
+  const [isSignInForm, setIsSignInForm] = useState(() => {
+    const saved = localStorage.getItem("authMode");
+    return saved ? saved === "signin" : true;
+  });
+
   const [errorMessage, setErrorMessage] = useState(null);
 
   const name = useRef(null);
@@ -33,7 +37,10 @@ const Login = () => {
   };
 
   const toggleSignInForm = () => {
-    setIsSignInForm(!isSignInForm);
+    const newState = !isSignInForm;
+    setIsSignInForm(newState);
+
+    localStorage.setItem("authMode", newState ? "signin" : "signup");
   };
 
   return (
