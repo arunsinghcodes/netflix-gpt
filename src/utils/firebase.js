@@ -28,4 +28,6 @@ if (typeof window !== "undefined" && process.env.NODE_ENV === "production") {
 
 export { app, analytics };
 
+console.log("ENV CHECK:", process.env.REACT_APP_FIREBASE_PROJECT_ID);
+
 export const auth = getAuth();
