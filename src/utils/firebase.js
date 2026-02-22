@@ -7,6 +7,10 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+console.log("ENV CHECK:", process.env.REACT_APP_FIREBASE_PROJECT_ID);
+
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -28,6 +32,6 @@ if (typeof window !== "undefined" && process.env.NODE_ENV === "production") {
 
 export { app, analytics };
 
-console.log("ENV CHECK:", process.env.REACT_APP_FIREBASE_PROJECT_ID);
+
 
 export const auth = getAuth();
