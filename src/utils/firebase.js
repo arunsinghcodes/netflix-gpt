@@ -35,4 +35,4 @@ export { app, analytics };
 
 
 
-export const auth = getAuth();
+export const auth = getAuth(app);
