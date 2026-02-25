@@ -6,10 +6,13 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 //? useRef:- useRef is a React Hook that lets you reference a value that's not needed for rendering
 
 const Login = () => {
+   const navigate = useNavigate();
+
   const [isSignInForm, setIsSignInForm] = useState(() => {
     const saved = localStorage.getItem("authMode");
     return saved ? saved === "signin" : true;
@@ -44,6 +47,7 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
+          navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -56,6 +60,7 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
+           navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
