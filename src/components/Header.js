@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import NetflixLogo from "../assets/Netflix_Logo_PMS.png";
-import { USER_AVATAR } from "../utils/contants";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useEffect } from "react";
@@ -43,6 +42,7 @@ const Header = () => {
 
     // Unsiubscribe when component unmounts
     return () => unsubscribe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
