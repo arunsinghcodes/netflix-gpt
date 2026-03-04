@@ -8,19 +8,17 @@ import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import useTopRatedMovies from "../hooks/useTopRated";
 
 const Browse = () => {
-
   useNowPlayingMovies();
   usePopularMovies();
   useTrendingMovies();
   useUpcomingMovies();
   useTopRatedMovies();
 
-  
   return (
-     <div className="bg-black min-h-screen overflow-x-hidden">
+    <div className="bg-black min-h-screen overflow-x-hidden">
       <Header />
-      <MainContainer/>
-      <SecondaryContainer/>
+      <MainContainer />
+      <SecondaryContainer />
     </div>
   );
 };

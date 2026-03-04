@@ -9,12 +9,12 @@ const useTrendingMovies = () => {
 
   const trendingMovies = useSelector((store) => store.movies.trendingMovies);
 
-  console.log("trendingMovies", trendingMovies)
+  console.log("trendingMovies", trendingMovies);
 
   const getTrendingMovies = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/trending/movie/day",
-      API_OPTIONS
+      API_OPTIONS,
     );
     const json = await data.json();
     dispatch(addTreandingMovies(json.results));
@@ -22,7 +22,7 @@ const useTrendingMovies = () => {
 
   useEffect(() => {
     !trendingMovies && getTrendingMovies();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

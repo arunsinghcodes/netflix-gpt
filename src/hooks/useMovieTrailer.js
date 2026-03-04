@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { API_OPTIONS, BASE_URL } from '../utils/contants';
-import { addTrailerVideo } from '../utils/movieSlice';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { API_OPTIONS, BASE_URL } from "../utils/contants";
+import { addTrailerVideo } from "../utils/movieSlice";
 
 const useMovieTrailer = (movieId) => {
- const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
 
@@ -23,6 +23,6 @@ const useMovieTrailer = (movieId) => {
     !trailerVideo && getMovieVideos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-}
+};
 
-export default useMovieTrailer
+export default useMovieTrailer;

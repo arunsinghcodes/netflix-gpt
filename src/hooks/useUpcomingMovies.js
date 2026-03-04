@@ -12,7 +12,7 @@ const useUpcomingMovies = () => {
   const getUpcomingMovies = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/upcoming",
-      API_OPTIONS
+      API_OPTIONS,
     );
     const json = await data.json();
     dispatch(addUpcomingMovies(json.results));
@@ -20,7 +20,7 @@ const useUpcomingMovies = () => {
 
   useEffect(() => {
     !upComingMovies && getUpcomingMovies();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
