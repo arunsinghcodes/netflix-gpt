@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
-  console.log("MovieList",movies.popularMovies)
-  console.log("trendingMovies",movies.trendingMovies)
+
   return (
     movies.nowPlayingMovies && (
       <div className="bg-black">
@@ -14,7 +13,7 @@ const SecondaryContainer = () => {
           <MovieList title={"Popular"} movies={movies.popularMovies} />
           <MovieList
             title={"Upcoming Movies"}
-            movies={movies.nowPlayingMovies}
+            movies={movies.upComingMovies}
           />
           <MovieList title={"Horror"} movies={movies.nowPlayingMovies} />
         </div>
