@@ -1,6 +1,8 @@
 // import GptMovieSuggestions from "./GptMovieSuggestions";
 // import GptSearchBar from "./GptSearchBar";
 
+import GptSearchBar from "./GptSearchBar";
+
 const GPTSearch = () => {
   return (
     <>
@@ -12,8 +14,8 @@ const GPTSearch = () => {
         />
       </div>
       <div className="">
-        {/* <GptSearchBar />
-        <GptMovieSuggestions /> */}
+        <GptSearchBar />
+        {/* <GptMovieSuggestions /> */}
       </div>
     </>
   );
