@@ -19,7 +19,7 @@ const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   return (
-    <div className="bg-black min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden">
       <Header />
       {showGptSearch ? (
         <GptSearch />
