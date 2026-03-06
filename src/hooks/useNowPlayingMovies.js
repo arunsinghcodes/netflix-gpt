@@ -1,10 +1,14 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNowPlayingMovies } from "../utils/movieSlice";
 import { API_OPTIONS, BASE_URL } from "../utils/contants";
 
 const useNowPlayingMovies = () => {
   // Fetch data from TMDB API and update the store
+
+  const nowPlayingMovies = useSelector(
+    (store) => store.movies.nowPlayingMovies
+  );
 
   const dispatch = useDispatch();
   const url = BASE_URL + "movie/now_playing?page=1";
@@ -16,7 +20,7 @@ const useNowPlayingMovies = () => {
   };
 
   useEffect(() => {
-    getNowPlayingMovies();
+   !nowPlayingMovies && getNowPlayingMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
