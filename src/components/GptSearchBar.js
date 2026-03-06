@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import lang from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import openai from "../utils/openai";
@@ -23,46 +23,44 @@ const GptSearchBar = () => {
     return json.results;
   };
 
+  
   const handleGptSearchClick = async () => {
-    console.log(searchText.current.value);
+    try {
+      const gptQuery =
+        "Act as a Movie Recommendation system and suggest some movies for the query : " +
+        searchText.current.value +
+        ". only give me names of 5 movies, comma seperated.";
 
-    // Make an API call to GPT API and get Movie Results
+      const gptResults = await openai.chat.completions.create({
+        messages: [{ role: "user", content: gptQuery }],
+        model: "gpt-3.5-turbo",
+      });
 
-    const gptQuery =
-      "Act as a Movie Recommendation system and suggest some movies for the query : " +
-      searchText.current.value +
-      ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
+      if (!gptResults?.choices?.length) {
+        console.error("No results from GPT");
+        return;
+      }
 
-    const gptResults = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
+      const content = gptResults.choices[0].message.content;
 
-    if (!gptResults.choices) {
-      // TODO: Write Error Handling
+      const gptMovies = content.split(",").map((movie) => movie.trim());
+
+      const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
+
+      const tmdbResults = await Promise.all(promiseArray);
+
+      dispatch(
+        addGptMovieResult({
+          movieNames: gptMovies,
+          movieResults: tmdbResults,
+        }),
+      );
+    } catch (error) {
+      console.error("GPT API Error:", error.message);
+
+      alert("GPT service unavailable. Please try again later.");
     }
-
-    console.log(gptResults.choices?.[0]?.message?.content);
-
-    // Andaz Apna Apna, Hera Pheri, Chupke Chupke, Jaane Bhi Do Yaaro, Padosan
-    const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
-
-    // ["Andaz Apna Apna", "Hera Pheri", "Chupke Chupke", "Jaane Bhi Do Yaaro", "Padosan"]
-
-    // For each movie I will search TMDB API
-
-    const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
-    // [Promise, Promise, Promise, Promise, Promise]
-
-    const tmdbResults = await Promise.all(promiseArray);
-
-    console.log(tmdbResults);
-
-    dispatch(
-      addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults }),
-    );
   };
-
   return (
     <div className="pt-[35%] md:pt-[10%] flex justify-center">
       <form
